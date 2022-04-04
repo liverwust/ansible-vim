@@ -39,8 +39,9 @@ function GetAnsibleIndent(lnum)
 
   let prevline = getline(prevlnum)
   let line = getline(a:lnum)
-  if line !~ s:blank
+  if line !~ s:blank && line !~ ':$'
     return default  " we only special case blank lines
+                    " and lines ending in :
   elseif prevline =~ s:array_entry
     if prevline =~ s:named_module_entry
       return increase
